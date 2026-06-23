@@ -19,7 +19,7 @@ function DocsPage() {
       <div className="flex items-center gap-2">
         <BookOpen className="h-6 w-6" />
         <div>
-          <h1 className="text-2xl font-bold">Client Setup Guide</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Client Setup Guide</h1>
           <p className="text-sm text-muted-foreground">Everything you need to launch this POS for a new client.</p>
         </div>
       </div>

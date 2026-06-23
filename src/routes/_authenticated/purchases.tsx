@@ -61,12 +61,12 @@ function PurchasesPage() {
   });
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">Purchases</h1><p className="text-sm text-muted-foreground">Stock-in records</p></div>
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm">
+        <div><h1 className="text-2xl font-bold tracking-tight">Purchases</h1><p className="text-sm text-muted-foreground">Stock-in records</p></div>
         <Button onClick={() => { reset(); setOpen(true); }}><Plus className="mr-1 h-4 w-4" />New Purchase</Button>
       </div>
-      <Card><CardContent className="p-3 sm:p-4">
+      <Card><CardContent className="p-4 sm:p-5">
         <div className="overflow-auto">
         <Table>
           <TableHeader><TableRow><TableHead>Ref</TableHead><TableHead>Date</TableHead><TableHead>Supplier</TableHead><TableHead>Items</TableHead><TableHead className="text-right">Total</TableHead><TableHead>Status</TableHead></TableRow></TableHeader>

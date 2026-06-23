@@ -68,20 +68,24 @@ function AuthPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-10">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.14),transparent_34rem)]" />
       <div className="w-full max-w-md">
-        <div className="mb-6 flex items-center justify-center gap-2">
-          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-md bg-primary text-primary-foreground">
+        <div className="mb-7 flex flex-col items-center justify-center gap-3 text-center">
+          <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl bg-primary text-primary-foreground shadow_main">
             {settings.store_logo_url
-              ? <img src={settings.store_logo_url} alt="" className="h-full w-full bg-white object-contain" />
-              : <Store className="h-6 w-6" />}
+              ? <img src={settings.store_logo_url} alt="" className="h-full w-full bg-white object-contain p-1" />
+              : <Store className="h-7 w-7" />}
           </div>
-          <span className="text-xl font-semibold">{settings.store_name}</span>
+          <div>
+            <span className="text-2xl font-bold tracking-tight">{settings.store_name || "POS Store"}</span>
+            <p className="mt-1 text-sm text-muted-foreground">Secure store management portal</p>
+          </div>
         </div>
-        <Card>
+        <Card className="overflow-hidden">
           <CardHeader>
-            <CardTitle>Welcome</CardTitle>
-            <CardDescription>Sign in or request a new account.</CardDescription>
+            <CardTitle className="text-2xl">Welcome back</CardTitle>
+            <CardDescription>Sign in or request a new account to continue.</CardDescription>
           </CardHeader>
 
           <CardContent>
@@ -90,15 +94,15 @@ function AuthPage() {
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
-              <TabsContent value="signin">
-                <form onSubmit={signIn} className="space-y-3">
+              <TabsContent value="signin" className="mt-5">
+                <form onSubmit={signIn} className="space-y-4">
                   <div><Label>Email</Label><Input type="email" required value={email} onChange={e=>setEmail(e.target.value)} /></div>
                   <div><Label>Password</Label><Input type="password" required value={password} onChange={e=>setPassword(e.target.value)} /></div>
                   <Button type="submit" className="w-full" disabled={busy}>{busy ? "Signing in..." : "Sign In"}</Button>
                 </form>
               </TabsContent>
-              <TabsContent value="signup">
-                <form onSubmit={signUp} className="space-y-3">
+              <TabsContent value="signup" className="mt-5">
+                <form onSubmit={signUp} className="space-y-4">
                   <div><Label>Full name</Label><Input required value={fullName} onChange={e=>setFullName(e.target.value)} /></div>
                   <div><Label>Email</Label><Input type="email" required value={email} onChange={e=>setEmail(e.target.value)} /></div>
                   <div><Label>Password</Label><Input type="password" required minLength={6} value={password} onChange={e=>setPassword(e.target.value)} /></div>

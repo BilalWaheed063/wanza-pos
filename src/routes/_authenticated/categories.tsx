@@ -55,12 +55,12 @@ function CategoriesPage() {
   });
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">Categories</h1><p className="text-sm text-muted-foreground">Organize products into groups</p></div>
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm">
+        <div><h1 className="text-2xl font-bold tracking-tight">Categories</h1><p className="text-sm text-muted-foreground">Organize products into groups</p></div>
         <Button onClick={() => { setEdit({ name: "", description: "" }); setOpen(true); }}><Plus className="mr-1 h-4 w-4" />Add Category</Button>
       </div>
-      <Card><CardContent className="p-3 sm:p-4">
+      <Card><CardContent className="p-4 sm:p-5">
         <Table>
           <TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Description</TableHead><TableHead className="text-right">Products</TableHead><TableHead className="w-24"></TableHead></TableRow></TableHeader>
           <TableBody>

@@ -74,11 +74,11 @@ function SetupPage() {
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-primary-foreground"><Store className="h-6 w-6" /></div>
         <div>
-          <h1 className="text-2xl font-bold">First-time setup</h1>
+          <h1 className="text-2xl font-bold tracking-tight">First-time setup</h1>
           <p className="text-sm text-muted-foreground">Enter your store details to get started. You can change these later in Settings.</p>
         </div>
       </div>
-      <form onSubmit={submit} className="space-y-4">
+      <form onSubmit={submit} className="space-y-6">
         <Card>
           <CardHeader><CardTitle>Store</CardTitle><CardDescription>Basic store information.</CardDescription></CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-2">

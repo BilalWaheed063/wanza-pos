@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { LogOut, Lock } from "lucide-react";
+import { LogOut, Lock, Store } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -18,6 +18,27 @@ export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   component: AuthedLayout,
 });
+
+const pageTitles: Record<string, { title: string; eyebrow: string }> = {
+  "/dashboard": { title: "Dashboard", eyebrow: "Store performance" },
+  "/pos": { title: "Point of Sale", eyebrow: "Fast checkout" },
+  "/products": { title: "Products", eyebrow: "Inventory management" },
+  "/categories": { title: "Categories", eyebrow: "Product organization" },
+  "/suppliers": { title: "Suppliers", eyebrow: "Vendor directory" },
+  "/customers": { title: "Customers", eyebrow: "Customer records" },
+  "/purchases": { title: "Purchases", eyebrow: "Stock receiving" },
+  "/returns": { title: "Returns", eyebrow: "Sales adjustments" },
+  "/reports": { title: "Reports", eyebrow: "Business insights" },
+  "/users": { title: "Users & Roles", eyebrow: "Access control" },
+  "/settings": { title: "Settings", eyebrow: "Store configuration" },
+  "/seed-demo": { title: "Demo Data", eyebrow: "Sample setup" },
+  "/docs": { title: "Setup Guide", eyebrow: "Help center" },
+  "/setup": { title: "First-time setup", eyebrow: "Store onboarding" },
+};
+
+function pageMeta(path: string) {
+  return pageTitles[path] ?? { title: "Workspace", eyebrow: "POS & Inventory" };
+}
 
 function AuthedLayout() {
   const { session, loading, signOut, fullName, user, role, status, refresh } = useAuth();
@@ -92,37 +113,50 @@ function AuthedLayout() {
   }
 
   const initials = (fullName || user?.email || "U").split(/\s+/).map(s=>s[0]).slice(0,2).join("").toUpperCase();
+  const meta = pageMeta(path);
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-muted/30">
+      <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
-        <div className="flex flex-1 flex-col">
-          <header className="sticky top-0 z-10 flex h-[69px] items-center justify-between border-b bg-background px-3 sm:px-4">
-            <div className="flex items-center gap-2">
-              <SidebarTrigger />
+        <div className="relative flex min-w-0 flex-1 flex-col">
+          <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border/70 bg-background/80 px-4 backdrop-blur-xl sm:px-6">
+            <div className="flex min-w-0 items-center gap-3">
+              <SidebarTrigger className="h-10 w-10 rounded-xl border border-border/70 bg-card shadow-sm" />
+              <div className="hidden min-w-0 flex-col sm:flex">
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">{meta.eyebrow}</span>
+                <span className="truncate text-base font-bold text-foreground">{meta.title}</span>
+              </div>
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-9 gap-2 px-2">
-                  <Avatar className="h-7 w-7"><AvatarFallback className="text-xs">{initials}</AvatarFallback></Avatar>
-                  <div className="hidden flex-col text-left sm:flex">
-                    <span className="text-sm leading-none">{fullName || user?.email}</span>
-                    <span className="text-xs capitalize text-muted-foreground">{role}</span>
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={async () => { await signOut(); nav({ to: "/auth", replace: true }); }}>
-                  <LogOut className="mr-2 h-4 w-4" /> Sign out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center gap-3">
+              <div className="hidden items-center gap-2 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-sm lg:flex">
+                <Store className="h-3.5 w-3.5" />
+                {settings.store_name || "POS Store"}
+              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="h-11 gap-2 rounded-full border border-border/70 bg-card/90 px-2.5 shadow-sm hover:bg-card">
+                    <Avatar className="h-8 w-8"><AvatarFallback className="bg-primary text-xs font-bold text-primary-foreground">{initials}</AvatarFallback></Avatar>
+                    <div className="hidden flex-col text-left sm:flex">
+                      <span className="max-w-[180px] truncate text-sm font-semibold leading-none">{fullName || user?.email}</span>
+                      <span className="mt-1 text-xs capitalize text-muted-foreground">{role}</span>
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="truncate">{user?.email}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={async () => { await signOut(); nav({ to: "/auth", replace: true }); }}>
+                    <LogOut className="mr-2 h-4 w-4" /> Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </header>
-          <main className="flex-1 p-3 sm:p-5">
-            <Outlet />
+          <main className="relative flex-1 p-4 sm:p-6 lg:p-8">
+            <div className="mx-auto w-full max-w-[1440px]">
+              <Outlet />
+            </div>
           </main>
         </div>
       </div>

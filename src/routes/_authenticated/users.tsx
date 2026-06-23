@@ -79,10 +79,10 @@ function UsersPage() {
   const disabled = rows.filter(r => r.status === "disabled");
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-start justify-between gap-3">
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-start justify-between gap-3 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm">
         <div>
-          <h1 className="text-2xl font-bold">Users & Roles</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Users & Roles</h1>
           <p className="text-sm text-muted-foreground">Admin can invite users, approve signups, reset passwords, and manage roles.</p>
         </div>
         <CreateUserDialog onCreate={async (v) => {
@@ -100,7 +100,7 @@ function UsersPage() {
         </TabsList>
 
         <TabsContent value="active">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             <UserTable
               rows={active}
               currentUserId={user?.id}
@@ -132,7 +132,7 @@ function UsersPage() {
         </TabsContent>
 
         <TabsContent value="pending">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             {pending.length === 0 ? (
               <div className="py-8 text-center text-sm text-muted-foreground">No pending signups.</div>
             ) : (
@@ -165,7 +165,7 @@ function UsersPage() {
         </TabsContent>
 
         <TabsContent value="disabled">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             {disabled.length === 0 ? (
               <div className="py-8 text-center text-sm text-muted-foreground">No disabled users.</div>
             ) : (

@@ -68,21 +68,24 @@ function Dashboard() {
   });
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Overview of today's activity</p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button asChild><Link to="/pos"><Plus className="mr-1 h-4 w-4" />New Sale</Link></Button>
-          <Button asChild variant="outline"><Link to="/products"><Package className="mr-1 h-4 w-4" />Add Product</Link></Button>
-          <Button asChild variant="outline"><Link to="/purchases"><ClipboardList className="mr-1 h-4 w-4" />Purchase</Link></Button>
-          <Button asChild variant="outline"><Link to="/reports"><BarChart3 className="mr-1 h-4 w-4" />Reports</Link></Button>
+    <div className="space-y-6">
+      <div className="overflow-hidden rounded-3xl border border-border/70 bg-card/95 p-5 shadow_main sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div className="mb-2 inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-primary">Live overview</div>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Dashboard</h1>
+            <p className="mt-1 text-sm text-muted-foreground">Overview of today's activity, stock health, and top selling products.</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild><Link to="/pos"><Plus className="mr-1 h-4 w-4" />New Sale</Link></Button>
+            <Button asChild variant="outline"><Link to="/products"><Package className="mr-1 h-4 w-4" />Add Product</Link></Button>
+            <Button asChild variant="outline"><Link to="/purchases"><ClipboardList className="mr-1 h-4 w-4" />Purchase</Link></Button>
+            <Button asChild variant="outline"><Link to="/reports"><BarChart3 className="mr-1 h-4 w-4" />Reports</Link></Button>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
         <Stat label="Today's Sales" value={fmtMoney(today.data?.totalSales ?? 0, sym)} icon={<TrendingUp className="h-4 w-4" />} />
         <Stat label="Today's Orders" value={String(today.data?.orders ?? 0)} icon={<ShoppingCart className="h-4 w-4" />} />
         <Stat label="Today's Profit" value={fmtMoney(today.data?.profit ?? 0, sym)} icon={<TrendingUp className="h-4 w-4" />} />
@@ -158,13 +161,13 @@ function Dashboard() {
 
 function Stat({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
   return (
-    <Card>
-      <CardContent className="pt-5">
+    <Card className="relative overflow-hidden">
+      <CardContent className="p-5">
         <div className="flex items-center justify-between text-muted-foreground">
-          <span className="text-xs uppercase tracking-wide">{label}</span>
-          {icon}
+          <span className="text-[11px] font-bold uppercase tracking-[0.14em]">{label}</span>
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">{icon}</span>
         </div>
-        <div className="mt-2 text-2xl font-bold tabular-nums">{value}</div>
+        <div className="mt-4 text-2xl font-bold tracking-tight tabular-nums">{value}</div>
       </CardContent>
     </Card>
   );

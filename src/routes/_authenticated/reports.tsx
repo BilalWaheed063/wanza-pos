@@ -84,9 +84,9 @@ function ReportsPage() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div><h1 className="text-2xl font-bold">Reports</h1><p className="text-sm text-muted-foreground">Sales, inventory and performance</p></div>
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-3 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm">
+        <div><h1 className="text-2xl font-bold tracking-tight">Reports</h1><p className="text-sm text-muted-foreground">Sales, inventory and performance</p></div>
         <div className="flex flex-wrap items-end gap-2">
           <div><Label className="text-xs">From</Label><Input type="date" value={from} onChange={e=>setFrom(e.target.value)} /></div>
           <div><Label className="text-xs">To</Label><Input type="date" value={to} onChange={e=>setTo(e.target.value)} /></div>
@@ -125,7 +125,7 @@ function ReportsPage() {
         </TabsList>
 
         <TabsContent value="products">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             <div className="mb-2 flex justify-end"><Button size="sm" variant="outline" onClick={()=>exportCsv(stats.byProduct.map(([name,v])=>({ name, qty: v.qty, total: v.total })), "products.csv")}><Download className="mr-1 h-4 w-4" />CSV</Button></div>
             <Table>
               <TableHeader><TableRow><TableHead>Product</TableHead><TableHead className="text-right">Qty</TableHead><TableHead className="text-right">Revenue</TableHead></TableRow></TableHeader>
@@ -138,7 +138,7 @@ function ReportsPage() {
         </TabsContent>
 
         <TabsContent value="categories">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             <Table>
               <TableHeader><TableRow><TableHead>Category</TableHead><TableHead className="text-right">Revenue</TableHead></TableRow></TableHeader>
               <TableBody>
@@ -150,7 +150,7 @@ function ReportsPage() {
         </TabsContent>
 
         <TabsContent value="cashiers">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             <Table>
               <TableHeader><TableRow><TableHead>Cashier</TableHead><TableHead className="text-right">Orders</TableHead><TableHead className="text-right">Sales</TableHead></TableRow></TableHeader>
               <TableBody>
@@ -162,7 +162,7 @@ function ReportsPage() {
         </TabsContent>
 
         <TabsContent value="inventory">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             <div className="mb-2 flex justify-end"><Button size="sm" variant="outline" onClick={()=>exportCsv((products.data ?? []).map((p: any)=>({ name: p.name, stock: p.stock_quantity, unit: p.unit, purchase: p.purchase_price, selling: p.selling_price, value: Number(p.stock_quantity)*Number(p.purchase_price) })), "inventory.csv")}><Download className="mr-1 h-4 w-4" />CSV</Button></div>
             <Table>
               <TableHeader><TableRow><TableHead>Product</TableHead><TableHead className="text-right">Stock</TableHead><TableHead className="text-right">Cost</TableHead><TableHead className="text-right">Value</TableHead></TableRow></TableHeader>
@@ -180,7 +180,7 @@ function ReportsPage() {
         </TabsContent>
 
         <TabsContent value="low">
-          <Card><CardContent className="p-3 sm:p-4">
+          <Card><CardContent className="p-4 sm:p-5">
             <Table>
               <TableHeader><TableRow><TableHead>Product</TableHead><TableHead className="text-right">Stock</TableHead><TableHead className="text-right">Min</TableHead></TableRow></TableHeader>
               <TableBody>

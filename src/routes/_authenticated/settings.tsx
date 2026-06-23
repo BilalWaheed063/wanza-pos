@@ -46,13 +46,13 @@ function SettingsPage() {
   return (
     <div className="space-y-4 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-bold">Store Settings</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Store Settings</h1>
         <p className="text-sm text-muted-foreground">White-label your store: branding, currency, tax, invoice & receipt.</p>
       </div>
 
       <MyAccountCard />
 
-      <form onSubmit={save} className="space-y-4">
+      <form onSubmit={save} className="space-y-6">
         <Card>
           <CardHeader><CardTitle>Branding</CardTitle><CardDescription>Shown on dashboard, POS, receipts and the login screen.</CardDescription></CardHeader>
           <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-2">

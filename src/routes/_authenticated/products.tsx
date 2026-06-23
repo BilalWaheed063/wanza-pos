@@ -99,13 +99,13 @@ function ProductsPage() {
   const openEdit = (p: any) => { setEditing({ ...p, category_id: p.category_id ?? null, supplier_id: p.supplier_id ?? null }); setOpen(true); };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm">
         <div><h1 className="text-2xl font-bold tracking-tight">Products</h1><p className="text-sm text-muted-foreground">Manage your inventory</p></div>
         <Button onClick={openNew}><Plus className="mr-1 h-4 w-4" />Add Product</Button>
       </div>
 
-      <Card><CardContent className="p-3 sm:p-4">
+      <Card><CardContent className="p-4 sm:p-5">
         <div className="mb-3 flex flex-wrap gap-2">
           <div className="relative min-w-[220px] flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
