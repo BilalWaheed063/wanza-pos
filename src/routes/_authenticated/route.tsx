@@ -120,7 +120,7 @@ function AuthedLayout() {
       <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
         <div className="relative flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border/70 bg-background/80 px-4 backdrop-blur-xl sm:px-6">
+          <header className="sticky top-0 z-20 flex h-[89px] items-center justify-between border-b border-border/70 bg-background/80 px-4 backdrop-blur-xl sm:px-6">
             <div className="flex min-w-0 items-center gap-3">
               <SidebarTrigger className="h-10 w-10 rounded-xl border border-border/70 bg-card shadow-sm" />
               <div className="hidden min-w-0 flex-col sm:flex">
@@ -154,7 +154,7 @@ function AuthedLayout() {
             </div>
           </header>
           <main className="relative flex-1 p-4 sm:p-6 lg:p-8">
-            <div className="mx-auto w-full max-w-[1440px]">
+            <div className="mx-auto w-full ">
               <Outlet />
             </div>
           </main>
